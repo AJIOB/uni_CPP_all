@@ -1,0 +1,11 @@
+.box
+{
+    -fx-alignment: center;
+
+    -fx-spacing: 8;
+}
+
+.buttonBox
+{
+    -fx-spacing: 25;
+}

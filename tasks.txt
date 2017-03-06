@@ -1,0 +1,4 @@
+	Lab1:
+Game: Divine the number from 1 to 100
+	Lab2:
+Make a simple zoo simulator
