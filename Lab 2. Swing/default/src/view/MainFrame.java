@@ -84,17 +84,6 @@ public class MainFrame extends JFrame {
                 showInfo(zoo.getWorker().ClearAnimalCage(finalI));
             });
         }
-
-        //new JButton("Feed elephant");
-
-
-        //this.add(button);
-/*
-        button.addActionListener((ActionEvent ae) -> {
-            button.setText("You pressed me");
-
-            infoLabel.setText("You pressed button");
-        });*/
     }
 
     private void showInfo(String s) {
