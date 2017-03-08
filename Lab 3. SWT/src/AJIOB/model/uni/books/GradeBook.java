@@ -1,5 +1,6 @@
 package AJIOB.model.uni.books;
 
+import AJIOB.model.uni.people.Person;
 import AJIOB.model.uni.teaching.Mark;
 
 import java.util.List;
@@ -10,29 +11,30 @@ import java.util.List;
 public class GradeBook {
     static int currentMaxNumber;
 
-    private final int recBookNumber;
-    private String name;
+    private final int gradeBookNumber;
+    private final Person person;
     private List<Mark> marks;
 
-    public GradeBook(final String studentName) {
-        this.name = studentName;
-        this.recBookNumber = getNextNumber();
+    public GradeBook(final Person person) {
+        this.person = person;
+        this.gradeBookNumber = getNextNumber();
     }
 
     /**
-     * Generate next grade book recBookNumber
+     * Generate next grade book gradeBookNumber
+     *
      * @return next grade book number
      */
     private static int getNextNumber() {
         return ++currentMaxNumber;
     }
 
-    public String getStudentName() {
-        return name;
+    public final Person getPerson() {
+        return person;
     }
 
     public int getGradeBookNumber() {
-        return recBookNumber;
+        return gradeBookNumber;
     }
 
     public final List<Mark> getMarks() {
@@ -41,6 +43,7 @@ public class GradeBook {
 
     /**
      * Write mark to grade book
+     *
      * @param mark Mark to add
      */
     public void addMark(final Mark mark) {

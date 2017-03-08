@@ -11,8 +11,8 @@ import java.util.List;
 public class Educator extends Worker {
     private List<Exam> exams;
 
-    Educator(String name) {
-        super(name);
+    public Educator(String name) {
+        super(name, "Educator");
     }
 
     /**

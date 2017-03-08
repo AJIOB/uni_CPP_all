@@ -6,12 +6,13 @@ package AJIOB.model.uni.teaching;
 public class Subject {
     private final String name;
 
-    public Subject(final String name){
+    public Subject(final String name) {
         this.name = name;
     }
 
     /**
      * Returns name of subject
+     *
      * @return Name of subject
      */
     public String getName() {

@@ -11,8 +11,8 @@ public class Engineer extends Worker {
 
     private ArrayList<ClassRoom> rooms;
 
-    Engineer(final String name, ArrayList<ClassRoom> rooms) {
-        super(name);
+    public Engineer(final String name, ArrayList<ClassRoom> rooms) {
+        super(name, "Engineer");
         this.rooms = rooms;
     }
 }

@@ -6,8 +6,9 @@ package AJIOB.model.uni.people;
 abstract public class Worker extends Person {
     private String job;
 
-    public Worker(String name) {
+    public Worker(String name, String job) {
         super(name);
+        this.job = job;
     }
 
     /**

@@ -7,11 +7,11 @@ import AJIOB.model.uni.books.GradeBook;
  */
 public class Student {
     private final String name;
-    private final GradeBook recBook;
+    private final GradeBook gradeBook;
 
-    public Student(String name, GradeBook recBook) {
+    public Student(String name, GradeBook gradeBook) {
         this.name = name;
-        this.recBook = recBook;
+        this.gradeBook = gradeBook;
     }
 
     public void passExam() {
