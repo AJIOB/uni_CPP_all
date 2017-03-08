@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.*;
 public class Main {
     public static void main(String[] args) {
         Display display = new Display();
-        Shell shell = new MainShell(display);
+        Shell shell = MainShell.get(display);
         shell.open();
         while (!shell.isDisposed()) {
             if (!display.readAndDispatch()) display.sleep();

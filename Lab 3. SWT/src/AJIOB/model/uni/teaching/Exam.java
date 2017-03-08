@@ -42,4 +42,9 @@ public class Exam {
     public void startExam() {
         //TODO
     }
+
+    @Override
+    public String toString() {
+        return ("Subject: " + subject.getName() + "Educator: " + educator.getName());
+    }
 }
