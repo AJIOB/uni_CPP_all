@@ -5,12 +5,11 @@ import AJIOB.model.uni.books.GradeBook;
 /**
  * Created by AJIOB on 07.03.2017.
  */
-public class Student {
-    private final String name;
+public class Student extends Person {
     private final GradeBook gradeBook;
 
     public Student(String name, GradeBook gradeBook) {
-        this.name = name;
+        super(name);
         this.gradeBook = gradeBook;
     }
 
@@ -18,4 +17,7 @@ public class Student {
         //todo
     }
 
+    public GradeBook getGradeBook() {
+        return gradeBook;
+    }
 }
