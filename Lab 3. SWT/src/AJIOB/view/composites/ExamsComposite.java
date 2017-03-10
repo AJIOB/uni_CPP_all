@@ -5,8 +5,10 @@ import AJIOB.model.uni.teaching.Exam;
 import AJIOB.view.MainShell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 /**
@@ -24,10 +26,18 @@ public class ExamsComposite extends Composite {
      */
     private void init() {
         //TODO
+        RowLayout layout = new RowLayout();
 
         setLayout(new FillLayout());
 
-        Table table = new Table(this, SWT.VIRTUAL | SWT.BORDER);
+        Table table = makeTable(this);
+
+    }
+
+    private Table makeTable(Composite parent) {
+        final int sizeOfColumn = 100;
+        //TODO: bad secection of row
+        Table table = new Table(parent, SWT.VIRTUAL | SWT.BORDER);
 /*
         table.addListener(SWT.SetData, new Listener() {
             public void handleEvent(Event event) {
@@ -38,17 +48,26 @@ public class ExamsComposite extends Composite {
             }
         });*/
 
+        TableColumn subject = new TableColumn(table, SWT.LEFT);
+        subject.setText("Subject");
+        subject.setWidth(sizeOfColumn);
+
+        TableColumn educator = new TableColumn(table, SWT.LEFT);
+        educator.setText("Educator");
+        educator.setWidth(sizeOfColumn);
+
+        table.setHeaderVisible(true);
 
         try {
             for (Exam exam : MainShell.getUniversity().getExams()) {
                 TableItem tItem = new TableItem(table, SWT.LEFT);
-                tItem.setText(exam.toString());
+                tItem.setText(new String[] {exam.getSubject().getName(), exam.getEducator().getName()});
             }
         } catch (NoInitException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
 
         }
-
+        return table;
     }
 }

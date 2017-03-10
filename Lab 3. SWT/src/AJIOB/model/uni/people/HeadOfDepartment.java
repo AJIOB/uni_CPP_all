@@ -2,15 +2,15 @@ package AJIOB.model.uni.people;
 
 import AJIOB.model.uni.teaching.Subject;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by AJIOB on 07.03.2017.
  */
 public class HeadOfDepartment extends Worker {
-    private List<Subject> subjects;
+    private ArrayList<Subject> subjects;
 
-    HeadOfDepartment(final String name) {
+    public HeadOfDepartment(final String name) {
         super(name, "HeadOfDepartment");
     }
 
@@ -35,7 +35,7 @@ public class HeadOfDepartment extends Worker {
         subjects.add(subj);
     }
 
-    public final List<Subject> getSubjects() {
+    public final ArrayList<Subject> getSubjects() {
         return subjects;
     }
 }

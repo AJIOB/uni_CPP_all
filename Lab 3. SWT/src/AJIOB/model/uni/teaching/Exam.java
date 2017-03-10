@@ -3,7 +3,7 @@ package AJIOB.model.uni.teaching;
 import AJIOB.model.uni.people.Educator;
 import AJIOB.model.uni.people.Student;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by AJIOB on 07.03.2017.
@@ -11,21 +11,25 @@ import java.util.List;
 public class Exam {
     private final Subject subject;
     private final Educator educator;
-    private final List<Student> students;
+    private final ArrayList<Student> students;
     private boolean isPassed;
 
-    public Exam(Subject subject, Educator educator, List<Student> students) {
+    public Exam(Subject subject, Educator educator, ArrayList<Student> students) {
         this.subject = subject;
         this.educator = educator;
         this.students = students;
     }
 
-    public List<Student> getStudents() {
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public Educator getEducator() {
+        return educator;
     }
 
     public boolean isPassed() {

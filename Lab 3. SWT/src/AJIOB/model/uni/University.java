@@ -2,13 +2,11 @@ package AJIOB.model.uni;
 
 import AJIOB.model.uni.books.GradeBook;
 import AJIOB.model.uni.buildings.Building;
-import AJIOB.model.uni.people.Person;
-import AJIOB.model.uni.people.Student;
-import AJIOB.model.uni.people.Worker;
+import AJIOB.model.uni.people.*;
 import AJIOB.model.uni.teaching.Exam;
 import AJIOB.model.uni.teaching.Subject;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by AJIOB on 07.03.2017.
@@ -19,16 +17,29 @@ public class University implements Building {
     private final double length;
     private final double width;
 
-    private List<Worker> workers;
-    private List<Subject> subjects;
-    private List<Exam> exams;
-    private List<GradeBook> gradeBooks;
-    private List<Student> students;
+    private ArrayList<Worker> workers = new ArrayList<>();
+    private ArrayList<Subject> subjects = new ArrayList<>();
+    private ArrayList<Exam> exams = new ArrayList<>();
+    private ArrayList<GradeBook> gradeBooks = new ArrayList<>();
+    private ArrayList<Student> students = new ArrayList<>();
 
     public University(String name, double length, double width) {
         this.name = name;
         this.length = length;
         this.width = width;
+
+        fillContainers();
+    }
+
+    private void fillContainers() {
+        //for test only
+        workers.add(new HeadOfDepartment("Alex"));
+        workers.add(new Educator("Petr"));
+        workers.add(new Educator("Edu"));
+        workers.add(new HeadOfDepartment("Ivan"));
+
+        exams.add(new Exam(new Subject("S1_test"), new Educator("Sergey"), null));
+        exams.add(new Exam(new Subject("S2_test"), new Educator("Daria"), null));
     }
 
     @Override
@@ -70,23 +81,23 @@ public class University implements Building {
         return name;
     }
 
-    public List<Student> getStudents() {
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
-    public List<Exam> getExams() {
+    public ArrayList<Exam> getExams() {
         return exams;
     }
 
-    public List<GradeBook> getGradeBooks() {
+    public ArrayList<GradeBook> getGradeBooks() {
         return gradeBooks;
     }
 
-    public List<Subject> getSubjects() {
+    public ArrayList<Subject> getSubjects() {
         return subjects;
     }
 
-    public List<Worker> getWorkers() {
+    public ArrayList<Worker> getWorkers() {
         return workers;
     }
 }

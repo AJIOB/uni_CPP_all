@@ -50,7 +50,7 @@ public class MainShell extends Shell {
 
         //making main tab folder
         TabFolder tabFolder = new TabFolder(shell, SWT.TOP);
-        makeTabItem(tabFolder, "Heads of department", new FirstTab());
+        makeTabItem(tabFolder, "Heads of departments", new FirstTab());
         makeTabItem(tabFolder, "Exams", new SecondTab());
         makeTabItem(tabFolder, "Students", new ThirdTab());
 

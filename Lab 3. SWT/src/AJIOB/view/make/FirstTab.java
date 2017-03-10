@@ -1,6 +1,6 @@
 package AJIOB.view.make;
 
-import AJIOB.view.composites.HeadsOfDepartmentComposite;
+import AJIOB.view.composites.HeadsOfDepartmentsComposite;
 import AJIOB.view.interfaces.MakeControl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -12,6 +12,6 @@ import org.eclipse.swt.widgets.Control;
 public class FirstTab implements MakeControl {
     @Override
     public Control make(Composite parent) {
-        return new HeadsOfDepartmentComposite(parent, SWT.FILL);
+        return new HeadsOfDepartmentsComposite(parent, SWT.FILL);
     }
 }
