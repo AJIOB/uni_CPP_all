@@ -3,7 +3,7 @@ package AJIOB.model.uni.books;
 import AJIOB.model.uni.people.Person;
 import AJIOB.model.uni.teaching.Mark;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by AJIOB on 07.03.2017.
@@ -13,7 +13,7 @@ public class GradeBook {
 
     private final int gradeBookNumber;
     private final Person person;
-    private List<Mark> marks;
+    private ArrayList<Mark> marks;
 
     public GradeBook(final Person person) {
         this.person = person;
@@ -37,7 +37,7 @@ public class GradeBook {
         return gradeBookNumber;
     }
 
-    public final List<Mark> getMarks() {
+    public final ArrayList<Mark> getMarks() {
         return marks;
     }
 

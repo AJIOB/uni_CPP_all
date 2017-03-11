@@ -5,16 +5,16 @@ import AJIOB.model.uni.teaching.Exam;
 import AJIOB.view.MainShell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.*;
 
 /**
  * Created by AJIOB on 08.03.2017.
  */
 public class ExamsComposite extends Composite {
+    private int selectedTableRow = -1;
+
     public ExamsComposite(Composite parent, int style) {
         super(parent, style);
 
@@ -27,26 +27,44 @@ public class ExamsComposite extends Composite {
     private void init() {
         //TODO
         RowLayout layout = new RowLayout();
+        layout.type = SWT.VERTICAL;
+        layout.spacing = 10;
+        layout.fill = true;
+        setLayout(layout);
 
-        setLayout(new FillLayout());
+        Label label = new Label(this, SWT.LEFT);
+        label.setText("Exams");
 
         Table table = makeTable(this);
+        table.setLayout(new FillLayout());
 
+        Button btn = new Button(this, SWT.CENTER | SWT.PUSH);
+        btn.setText("Pass");
+        btn.setLayoutData(new RowData(60, 30));
+        btn.addListener(SWT.PUSH, event -> {
+            if (selectedTableRow < 0) {
+                return;
+            }
+
+            try {
+                MainShell.getUniversity().getExams().get(selectedTableRow).startExam();
+            } catch (NoInitException e) {
+
+            }
+        });
     }
 
     private Table makeTable(Composite parent) {
         final int sizeOfColumn = 100;
-        //TODO: bad secection of row
-        Table table = new Table(parent, SWT.VIRTUAL | SWT.BORDER);
-/*
-        table.addListener(SWT.SetData, new Listener() {
+
+        Table table = new Table(parent, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
+
+        table.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event event) {
                 TableItem item = (TableItem) event.item;
-                int index = table.indexOf(item);
-                item.setText("Item " + index);
-                System.out.println(item.getText());
+                selectedTableRow = table.indexOf(item);
             }
-        });*/
+        });
 
         TableColumn subject = new TableColumn(table, SWT.LEFT);
         subject.setText("Subject");
@@ -61,7 +79,7 @@ public class ExamsComposite extends Composite {
         try {
             for (Exam exam : MainShell.getUniversity().getExams()) {
                 TableItem tItem = new TableItem(table, SWT.LEFT);
-                tItem.setText(new String[] {exam.getSubject().getName(), exam.getEducator().getName()});
+                tItem.setText(new String[]{exam.getSubject().getName(), exam.getEducator().getName()});
             }
         } catch (NoInitException e) {
             e.printStackTrace();

@@ -50,7 +50,7 @@ public class HeadsOfDepartmentsComposite extends Composite {
         Label headText = new Label(res, SWT.LEFT | SWT.HORIZONTAL);
         headText.setText("Heads of departments");
 
-        Table mainTable = new Table(res, SWT.BORDER);
+        Table mainTable = new Table(res, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
 
         TableColumn name = new TableColumn(mainTable, SWT.LEFT);
         name.setText("Name");
