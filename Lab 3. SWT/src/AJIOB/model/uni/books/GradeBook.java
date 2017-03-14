@@ -9,11 +9,11 @@ import java.util.ArrayList;
  * Created by AJIOB on 07.03.2017.
  */
 public class GradeBook {
-    static int currentMaxNumber;
+    private static int currentMaxNumber = 0;
 
     private final int gradeBookNumber;
     private final Person person;
-    private ArrayList<Mark> marks;
+    private ArrayList<Mark> marks = new ArrayList<>();
 
     public GradeBook(final Person person) {
         this.person = person;

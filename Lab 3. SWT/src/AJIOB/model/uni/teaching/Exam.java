@@ -4,6 +4,7 @@ import AJIOB.model.uni.people.Educator;
 import AJIOB.model.uni.people.Student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by AJIOB on 07.03.2017.
@@ -11,13 +12,15 @@ import java.util.ArrayList;
 public class Exam {
     private final Subject subject;
     private final Educator educator;
-    private final ArrayList<Student> students;
+    private final ArrayList<Student> students = new ArrayList<>();
     private boolean isPassed;
 
-    public Exam(Subject subject, Educator educator, ArrayList<Student> students) {
+    public Exam(Subject subject, Educator educator, Student[] students) {
         this.subject = subject;
         this.educator = educator;
-        this.students = students;
+        if (students != null) {
+            Collections.addAll(this.students, students);
+        }
     }
 
     public ArrayList<Student> getStudents() {
@@ -32,10 +35,20 @@ public class Exam {
         return educator;
     }
 
+    /**
+     * Returns is exam passed
+     *
+     * @return Is exam passed
+     */
     public boolean isPassed() {
         return isPassed;
     }
 
+    /**
+     * Set is exam passed
+     *
+     * @param passed Is exam passed
+     */
     public void setPassed(boolean passed) {
         isPassed = passed;
     }
@@ -44,7 +57,7 @@ public class Exam {
      * Start current exam
      */
     public void startExam() {
-        //TODO
+        educator.takeExam(this);
     }
 
     @Override

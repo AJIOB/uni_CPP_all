@@ -7,7 +7,7 @@ public class Mark {
     private int mark;
     private Subject subject;
 
-    Mark(final int mark, final Subject subject) {
+    public Mark(final int mark, final Subject subject) {
         this.mark = mark;
         this.subject = subject;
     }

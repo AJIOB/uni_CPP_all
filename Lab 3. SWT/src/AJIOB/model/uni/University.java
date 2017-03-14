@@ -33,13 +33,33 @@ public class University implements Building {
 
     private void fillContainers() {
         //for test only
-        workers.add(new HeadOfDepartment("Alex"));
-        workers.add(new Educator("Petr"));
-        workers.add(new Educator("Edu"));
-        workers.add(new HeadOfDepartment("Ivan"));
+        Educator[] eduTEMP = new Educator[2];
+        eduTEMP[0] = new Educator("Edu");
+        eduTEMP[1] = new Educator("Petr");
 
-        exams.add(new Exam(new Subject("S1_test"), new Educator("Sergey"), null));
-        exams.add(new Exam(new Subject("S2_test"), new Educator("Daria"), null));
+        Subject[] subjTEMP = new Subject[2];
+        subjTEMP[0] = new Subject("S1_test");
+        subjTEMP[1] = new Subject("S2_test");
+
+        HeadOfDepartment[] headTEMP = new HeadOfDepartment[2];
+        headTEMP[0] = new HeadOfDepartment("Alex");
+        headTEMP[0].getEducators().add(eduTEMP[0]);
+        headTEMP[0].addSubject(subjTEMP[0]);
+        headTEMP[1] = new HeadOfDepartment("Ivan");
+        headTEMP[1].getEducators().add(eduTEMP[1]);
+        headTEMP[1].addSubject(subjTEMP[1]);
+
+        workers.add(headTEMP[0]);
+        workers.add(eduTEMP[0]);
+        workers.add(eduTEMP[1]);
+        workers.add(headTEMP[1]);
+
+        enrollStudent(new Person("Maria"));
+        enrollStudent(new Person("Valentin"));
+        enrollStudent(new Person("Anton"));
+
+        exams.add(new Exam(subjTEMP[0], eduTEMP[0], new Student[]{students.get(0), students.get(2)}));
+        exams.add(new Exam(subjTEMP[1], eduTEMP[1], new Student[]{students.get(1), students.get(2)}));
     }
 
     @Override
@@ -53,17 +73,19 @@ public class University implements Building {
      * @param futureStudent Person that will be a student
      */
     public void enrollStudent(Person futureStudent) {
-        //TODO
+        students.add(new Student(futureStudent, getNewGradeBook(futureStudent)));
     }
 
     /**
      * Make new record book for student
      *
+     * @param person Person, who will get this record book
      * @return New record book
      */
-    public GradeBook getNewRecordBook() {
-        //TODO
-        return new GradeBook(null);
+    private GradeBook getNewGradeBook(Person person) {
+        GradeBook gb = new GradeBook(person);
+        gradeBooks.add(gb);
+        return gb;
     }
 
     /**
@@ -72,9 +94,10 @@ public class University implements Building {
      * @param subj Subject, that students will pass
      * @return New exam
      */
-    public Exam createExam(final Subject subj) {
-        //TODO
-        return new Exam(new Subject(""), null, null);
+    public Exam createExam(final Subject subj, final Educator educator) {
+        Exam newExam = new Exam(subj, educator, (Student[]) students.toArray());
+        exams.add(newExam);
+        return newExam;
     }
 
     public String getName() {

@@ -9,10 +9,14 @@ import java.util.ArrayList;
  */
 public class Engineer extends Worker {
 
-    private ArrayList<ClassRoom> rooms;
+    private ArrayList<ClassRoom> rooms = new ArrayList<>();
 
     public Engineer(final String name, ArrayList<ClassRoom> rooms) {
         super(name, "Engineer");
         this.rooms = rooms;
+    }
+
+    public ArrayList<ClassRoom> getRooms() {
+        return rooms;
     }
 }
