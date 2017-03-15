@@ -1,13 +1,12 @@
 package AJIOB.view.composites;
 
 import AJIOB.exceptions.NoInitException;
+import AJIOB.model.listeners.Listener;
 import AJIOB.model.uni.people.Person;
 import AJIOB.model.uni.people.Student;
 import AJIOB.view.MainShell;
 import AJIOB.view.make.AddPersonShell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
@@ -17,6 +16,9 @@ import org.eclipse.swt.widgets.*;
  * Created by AJIOB on 08.03.2017.
  */
 public class StudentsComposite extends Composite {
+    private Table studTable = null;
+    private Table gradeTable = null;
+
     public StudentsComposite(Composite parent, int style) {
         super(parent, style);
 
@@ -27,19 +29,42 @@ public class StudentsComposite extends Composite {
      * Add all basic functional
      */
     private void init() {
-        //TODO
+        RowLayout layout = new RowLayout();
+        layout.type = SWT.HORIZONTAL;
+        layout.spacing = 10;
+        layout.fill = true;
+        layout.marginHeight = 10;
+        layout.marginWidth = 10;
+        setLayout(layout);
+
+        makeStudPart(this);
+        makeGradeBookPart(this);
+
+        studTable.addListener(SWT.Selection, event -> {
+            //todo: show grade book
+        });
+    }
+
+    /**
+     * Make composite with table with students
+     *
+     * @param parent Parent Composite class
+     * @return Composite that made
+     */
+    private Composite makeStudPart(Composite parent) {
+        Composite c = new Composite(parent, SWT.FILL);
         RowLayout layout = new RowLayout();
         layout.type = SWT.VERTICAL;
         layout.spacing = 10;
         layout.fill = true;
-        setLayout(layout);
+        c.setLayout(layout);
 
-        Label label = new Label(this, SWT.LEFT);
+        Label label = new Label(c, SWT.LEFT);
         label.setText("Students");
 
-        Table table = makeTable(this);
+        studTable = makeStudTable(c);
 
-        Button btn = new Button(this, SWT.CENTER | SWT.PUSH);
+        Button btn = new Button(c, SWT.CENTER | SWT.PUSH);
         btn.setText("Add new one");
         btn.setLayoutData(new RowData(60, 30));
         btn.addListener(SWT.Selection, event -> {
@@ -49,25 +74,24 @@ public class StudentsComposite extends Composite {
                 MainShell.getUniversity().enrollStudent(newPerson);
             } catch (NoInitException e) {
                 e.printStackTrace();
-                return;
-            } catch (NullPointerException e)
-            {
-                return;
+            } catch (NullPointerException e) {
             }
-
-            //todo: update Table
         });
+
+        return c;
     }
 
-    private Table makeTable(Composite parent) {
+    /**
+     * Make and return table with students
+     *
+     * @param parent Parent Composite
+     * @return Table that made
+     */
+    private Table makeStudTable(Composite parent) {
         final int sizeOfColumn = 120;
 
         Table table = new Table(parent, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
         table.setLayout(new FillLayout());
-
-        table.addListener(SWT.Selection, event ->  {
-            //todo: show grade book
-        });
 
         TableColumn subject = new TableColumn(table, SWT.LEFT);
         subject.setText("Name");
@@ -84,21 +108,47 @@ public class StudentsComposite extends Composite {
                 TableItem tItem = new TableItem(table, SWT.LEFT);
                 tItem.setText(new String[]{s.getName(), Integer.toString(s.getGradeBook().getGradeBookNumber())});
             }
+
+            //add listener to changing array
+            MainShell.getUniversity().addStudentListener(new Listener<Student>() {
+                @Override
+                public void SthIsChanged(int changedIndex, Student s) {
+                    table.getItem(changedIndex).setText(
+                            new String[]{s.getName(), Integer.toString(s.getGradeBook().getGradeBookNumber())}
+                    );
+                }
+
+                @Override
+                public void SthIsAdd(int newElemIndex, Student s) {
+                    TableItem tItem = new TableItem(table, SWT.LEFT);
+                    tItem.setText(new String[]{s.getName(), Integer.toString(s.getGradeBook().getGradeBookNumber())});
+                }
+
+                @Override
+                public void SthIsRemoved(int oldElemIndex, Student oldElem) {
+                    table.remove(oldElemIndex);
+                }
+            });
+
         } catch (NoInitException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
 
         }
 
-        //TableViewer
-
-
-        return new Table(parent, SWT.NONE);
+        return table;
     }
 
-    private void LoadStudentsTable(Table table) {
+    /**
+     * Make composite with info about student's grade book
+     *
+     * @param parent
+     * @return
+     */
+    private Composite makeGradeBookPart(Composite parent) {
+        Composite c = new Composite(parent, SWT.FILL);
 
-
-        //TODO. add TableWiever
+        //todo
+        return c;
     }
 }

@@ -136,23 +136,23 @@ public class University implements Building {
         return workers;
     }
 
-    public void AddWorkerListener(Listener<Worker> listener) {
+    public void addWorkerListener(Listener<Worker> listener) {
         workerListeners.add(listener);
     }
 
-    public void AddSubjectListener(Listener<Subject> listener) {
+    public void addSubjectListener(Listener<Subject> listener) {
         subjectListeners.add(listener);
     }
 
-    public void AddExamListener(Listener<Exam> listener) {
+    public void addExamListener(Listener<Exam> listener) {
         examListeners.add(listener);
     }
 
-    public void AddGradeBookListener(Listener<GradeBook> listener) {
+    public void addGradeBookListener(Listener<GradeBook> listener) {
         gradeBooksListeners.add(listener);
     }
 
-    public void AddStudentListener(Listener<Student> listener) {
+    public void addStudentListener(Listener<Student> listener) {
         studListeners.add(listener);
     }
 }
