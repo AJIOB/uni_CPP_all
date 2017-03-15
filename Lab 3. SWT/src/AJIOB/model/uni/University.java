@@ -1,5 +1,7 @@
 package AJIOB.model.uni;
 
+import AJIOB.model.listeners.MakeOperation;
+import AJIOB.model.listeners.Listener;
 import AJIOB.model.uni.books.GradeBook;
 import AJIOB.model.uni.buildings.Building;
 import AJIOB.model.uni.people.*;
@@ -23,6 +25,12 @@ public class University implements Building {
     private ArrayList<GradeBook> gradeBooks = new ArrayList<>();
     private ArrayList<Student> students = new ArrayList<>();
 
+    private final ArrayList<Listener<Worker>> workerListeners = new ArrayList<>();
+    private final ArrayList<Listener<Subject>> subjectListeners = new ArrayList<>();
+    private final ArrayList<Listener<Exam>> examListeners = new ArrayList<>();
+    private final ArrayList<Listener<GradeBook>> gradeBooksListeners = new ArrayList<>();
+    private final ArrayList<Listener<Student>> studListeners = new ArrayList<>();
+
     public University(String name, double length, double width) {
         this.name = name;
         this.length = length;
@@ -32,7 +40,7 @@ public class University implements Building {
     }
 
     private void fillContainers() {
-        //for test only
+        //for test only (no calling listeners)
         Educator[] eduTEMP = new Educator[2];
         eduTEMP[0] = new Educator("Edu");
         eduTEMP[1] = new Educator("Petr");
@@ -73,7 +81,7 @@ public class University implements Building {
      * @param futureStudent Person that will be a student
      */
     public void enrollStudent(Person futureStudent) {
-        students.add(new Student(futureStudent, getNewGradeBook(futureStudent)));
+        MakeOperation.add(studListeners, students, new Student(futureStudent, getNewGradeBook(futureStudent)));
     }
 
     /**
@@ -84,7 +92,9 @@ public class University implements Building {
      */
     private GradeBook getNewGradeBook(Person person) {
         GradeBook gb = new GradeBook(person);
-        gradeBooks.add(gb);
+
+        MakeOperation.add(gradeBooksListeners, gradeBooks, gb);
+
         return gb;
     }
 
@@ -96,7 +106,9 @@ public class University implements Building {
      */
     public Exam createExam(final Subject subj, final Educator educator) {
         Exam newExam = new Exam(subj, educator, (Student[]) students.toArray());
-        exams.add(newExam);
+
+        MakeOperation.add(examListeners, exams, newExam);
+
         return newExam;
     }
 
@@ -122,5 +134,25 @@ public class University implements Building {
 
     public ArrayList<Worker> getWorkers() {
         return workers;
+    }
+
+    public void AddWorkerListener(Listener<Worker> listener) {
+        workerListeners.add(listener);
+    }
+
+    public void AddSubjectListener(Listener<Subject> listener) {
+        subjectListeners.add(listener);
+    }
+
+    public void AddExamListener(Listener<Exam> listener) {
+        examListeners.add(listener);
+    }
+
+    public void AddGradeBookListener(Listener<GradeBook> listener) {
+        gradeBooksListeners.add(listener);
+    }
+
+    public void AddStudentListener(Listener<Student> listener) {
+        studListeners.add(listener);
     }
 }

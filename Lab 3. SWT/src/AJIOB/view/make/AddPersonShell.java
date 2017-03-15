@@ -71,7 +71,10 @@ public class AddPersonShell {
         Button okBtn = new Button(downComposite, SWT.CENTER);
         okBtn.setText("OK");
         okBtn.addListener(SWT.Selection, event -> {
-            person = new Person(nameText.getText());
+            if (nameText.getText() != "") {
+                person = new Person(nameText.getText());
+            }
+
             sh.close();
         });
 

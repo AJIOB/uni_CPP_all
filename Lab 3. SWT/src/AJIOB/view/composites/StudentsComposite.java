@@ -6,6 +6,8 @@ import AJIOB.model.uni.people.Student;
 import AJIOB.view.MainShell;
 import AJIOB.view.make.AddPersonShell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
@@ -87,10 +89,16 @@ public class StudentsComposite extends Composite {
         } catch (NullPointerException e) {
 
         }
-        return table;
+
+        //TableViewer
+
+
+        return new Table(parent, SWT.NONE);
     }
 
-    private void ReloadTable() {
+    private void LoadStudentsTable(Table table) {
+
+
         //TODO. add TableWiever
     }
 }
