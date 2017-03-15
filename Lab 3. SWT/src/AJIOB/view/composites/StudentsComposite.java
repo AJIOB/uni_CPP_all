@@ -48,6 +48,9 @@ public class StudentsComposite extends Composite {
             } catch (NoInitException e) {
                 e.printStackTrace();
                 return;
+            } catch (NullPointerException e)
+            {
+                return;
             }
 
             //todo: update Table

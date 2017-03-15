@@ -51,7 +51,7 @@ public class AddPersonShell {
         sh.setLayout(layout);
 
         Label HeaderLabel = new Label(sh, SWT.CENTER);
-        HeaderLabel.setText("Person info");
+        HeaderLabel.setText("Person info:");
 
         Composite gridComposite = new Composite(sh, SWT.FILL);
         GridLayout gLayout = new GridLayout();
@@ -63,6 +63,22 @@ public class AddPersonShell {
 
         Text nameText = new Text(gridComposite, SWT.FILL);
 
-        //todo: add listener & make person if need
+        Composite downComposite = new Composite(sh, SWT.FILL);
+        RowLayout rlayout = new RowLayout();
+        rlayout.center = true;
+        downComposite.setLayout(rlayout);
+
+        Button okBtn = new Button(downComposite, SWT.CENTER);
+        okBtn.setText("OK");
+        okBtn.addListener(SWT.Selection, event -> {
+            person = new Person(nameText.getText());
+            sh.close();
+        });
+
+        Button cancelBtn = new Button(downComposite, SWT.CENTER);
+        cancelBtn.setText("Cancel");
+        cancelBtn.addListener(SWT.Selection, event -> {
+            sh.close();
+        });
     }
 }
