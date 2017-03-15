@@ -79,7 +79,7 @@ public class University implements Building {
     /**
      * Make new record book for student
      *
-     * @param person Person, who will get this record book
+     * @param person Person, who will getNewShell this record book
      * @return New record book
      */
     private GradeBook getNewGradeBook(Person person) {

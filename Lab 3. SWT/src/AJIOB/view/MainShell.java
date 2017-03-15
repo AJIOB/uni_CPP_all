@@ -3,7 +3,9 @@ package AJIOB.view;
 import AJIOB.exceptions.NoInitException;
 import AJIOB.model.uni.University;
 import AJIOB.view.interfaces.MakeControl;
-import AJIOB.view.make.*;
+import AJIOB.view.make.FirstTab;
+import AJIOB.view.make.SecondTab;
+import AJIOB.view.make.ThirdTab;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -18,26 +20,37 @@ import org.eclipse.swt.widgets.TabItem;
  *
  * @author AJIOB
  */
-public class MainShell extends Shell {
+public class MainShell /*extends Shell*/ {
+    private static Display display;
     private static University uni;
-    private static Shell shell;
-    private static boolean isRuningYet = false;
+    private static Shell shell = null;
 
-    public static Shell get(Display display) {
-        if (isRuningYet) {
+    /**
+     * Make new ma
+     *
+     * @param display Parent display
+     * @return Shell that was made
+     */
+    public static Shell getNewShell(Display display) {
+        if (MainShell.shell != null) {
             return shell;
         }
+
+        MainShell.display = display;
 
         shell = new Shell(display);
 
         uni = new University("BSUIR", 200, 300);
 
-        isRuningYet = true;
-
         init();
 
         return shell;
     }
+
+    public static Shell getShell() {
+        return shell;
+    }
+
 
     /**
      * Base init of shell view
@@ -57,7 +70,7 @@ public class MainShell extends Shell {
     }
 
     /**
-     * Fast help to make SWT TabItem for SWT TabFolder object
+     * Fast help to run SWT TabItem for SWT TabFolder object
      *
      * @param parent  TabFolder parent object
      * @param text    Head of tab
@@ -76,13 +89,17 @@ public class MainShell extends Shell {
      * Returns University value
      *
      * @return University value that was set before
-     * @throws NoInitException If you run this method before get() method
+     * @throws NoInitException If you run this method before getNewShell() method
      */
     public static University getUniversity() throws NoInitException {
-        if (!isRuningYet) {
+        if (shell == null) {
             throw new NoInitException();
         }
 
         return uni;
+    }
+
+    public static Display getDisplay() {
+        return display;
     }
 }

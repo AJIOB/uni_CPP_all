@@ -36,12 +36,11 @@ public class ExamsComposite extends Composite {
         label.setText("Exams");
 
         Table table = makeTable(this);
-        table.setLayout(new FillLayout());
 
         Button btn = new Button(this, SWT.CENTER | SWT.PUSH);
         btn.setText("Pass");
         btn.setLayoutData(new RowData(60, 30));
-        btn.addListener(SWT.PUSH, event -> {
+        btn.addListener(SWT.Selection, event -> {
             if (selectedTableRow < 0) {
                 return;
             }
@@ -51,6 +50,8 @@ public class ExamsComposite extends Composite {
             } catch (NoInitException e) {
 
             }
+
+            ReloadTable();
         });
     }
 
@@ -58,6 +59,7 @@ public class ExamsComposite extends Composite {
         final int sizeOfColumn = 100;
 
         Table table = new Table(parent, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
+        table.setLayout(new FillLayout());
 
         table.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event event) {
@@ -87,5 +89,9 @@ public class ExamsComposite extends Composite {
 
         }
         return table;
+    }
+
+    private void ReloadTable() {
+        //TODO. add TableWiever
     }
 }

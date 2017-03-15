@@ -1,10 +1,8 @@
 package AJIOB;
 
-import AJIOB.model.uni.University;
 import AJIOB.view.MainShell;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * Created by AJIOB on 07.03.2017.
@@ -12,7 +10,8 @@ import org.eclipse.swt.widgets.*;
 public class Main {
     public static void main(String[] args) {
         Display display = new Display();
-        Shell shell = MainShell.get(display);
+        Shell shell = MainShell.getNewShell(display);
+        shell.pack();
         shell.open();
         while (!shell.isDisposed()) {
             if (!display.readAndDispatch()) display.sleep();

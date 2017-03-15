@@ -1,7 +1,9 @@
 package AJIOB.model.uni.teaching;
 
+import AJIOB.exceptions.NoInitException;
 import AJIOB.model.uni.people.Educator;
 import AJIOB.model.uni.people.Student;
+import AJIOB.view.MainShell;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,7 +59,17 @@ public class Exam {
      * Start current exam
      */
     public void startExam() {
-        educator.takeExam(this);
+        System.out.println("Exam " + subject.getName() + " is started");
+        if (!educator.takeExam(this)) {
+            return;
+        }
+
+        try
+        {
+            MainShell.getUniversity().getExams().remove(this);
+        } catch (NoInitException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

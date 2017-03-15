@@ -1,11 +1,9 @@
 package AJIOB.view.composites;
 
 import AJIOB.exceptions.NoInitException;
-import AJIOB.model.uni.people.HeadOfDepartment;
 import AJIOB.model.uni.people.Worker;
 import AJIOB.view.MainShell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
@@ -46,7 +44,6 @@ public class HeadsOfDepartmentsComposite extends Composite {
         Composite res = new Composite(parent, SWT.NONE);
         res.setLayout(layout);
 
-
         Label headText = new Label(res, SWT.LEFT | SWT.HORIZONTAL);
         headText.setText("Heads of departments");
 
@@ -60,7 +57,7 @@ public class HeadsOfDepartmentsComposite extends Composite {
             for (Worker w : MainShell.getUniversity().getWorkers()) {
                 if (w.getJob() == "HeadOfDepartment") {
                     TableItem tItem = new TableItem(mainTable, SWT.NONE);
-                    tItem.setText(new String[] {w.getName()});
+                    tItem.setText(new String[]{w.getName()});
                 }
             }
         } catch (NoInitException e) {
