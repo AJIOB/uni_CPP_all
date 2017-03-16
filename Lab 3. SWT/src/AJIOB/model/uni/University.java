@@ -41,9 +41,10 @@ public class University implements Building {
 
     private void fillContainers() {
         //for test only (no calling listeners)
-        Educator[] eduTEMP = new Educator[2];
-        eduTEMP[0] = new Educator("Edu");
+        Educator[] eduTEMP = new Educator[3];
+        eduTEMP[0] = new Educator("Dmitriy");
         eduTEMP[1] = new Educator("Petr");
+        eduTEMP[2] = new Educator("Irina");
 
         Subject[] subjTEMP = new Subject[3];
         subjTEMP[0] = new Subject("Math");
@@ -53,6 +54,7 @@ public class University implements Building {
         HeadOfDepartment[] headTEMP = new HeadOfDepartment[2];
         headTEMP[0] = new HeadOfDepartment("Alex");
         headTEMP[0].getEducators().add(eduTEMP[0]);
+        headTEMP[0].getEducators().add(eduTEMP[2]);
         headTEMP[0].addSubject(subjTEMP[0]);
         headTEMP[0].addSubject(subjTEMP[2]);
         headTEMP[1] = new HeadOfDepartment("Ivan");
@@ -107,7 +109,11 @@ public class University implements Building {
      * @return New exam
      */
     public Exam createExam(final Subject subj, final Educator educator) {
-        Exam newExam = new Exam(subj, educator, (Student[]) students.toArray());
+        //convert ArrayList to Array[]
+        Student[] studArray = new Student[students.size()];
+        studArray = students.toArray(studArray);
+
+        Exam newExam = new Exam(subj, educator, studArray);
 
         MakeOperation.add(examListeners, exams, newExam);
 

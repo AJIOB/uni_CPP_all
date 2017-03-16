@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class HeadsOfDepartmentsComposite extends Composite {
     private Table subjectTable = null;
     private final ArrayList<HeadOfDepartment> heads = new ArrayList<>();
+    private int currentHeadsIndex = -1;
 
     public HeadsOfDepartmentsComposite(Composite parent, int style) {
         super(parent, style);
@@ -78,6 +79,7 @@ public class HeadsOfDepartmentsComposite extends Composite {
         mainTable.addListener(SWT.Selection, event -> {
             int index = mainTable.indexOf((TableItem) event.item);
             refreshSubjectsInfo(heads.get(index));
+            currentHeadsIndex = index;
         });
 
         return res;
@@ -103,7 +105,16 @@ public class HeadsOfDepartmentsComposite extends Composite {
         Button addBtn = new Button(g, SWT.CENTER);
         addBtn.setText("Add exam");
         addBtn.addListener(SWT.Selection, event -> {
-            //TODO
+            int i = subjectTable.getSelectionIndex();
+
+            if ((i < 0) || (currentHeadsIndex < 0))
+            {
+                return;
+            }
+
+            HeadOfDepartment currHead = heads.get(currentHeadsIndex);
+
+            currHead.appointExam(currHead.getSubjects().get(i));
         });
 
         return g;
