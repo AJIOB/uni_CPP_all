@@ -20,6 +20,7 @@ public class Exam {
     public Exam(Subject subject, Educator educator, Student[] students) {
         this.subject = subject;
         this.educator = educator;
+        educator.addExam(this);
         if (students != null) {
             Collections.addAll(this.students, students);
         }
@@ -63,9 +64,8 @@ public class Exam {
             return;
         }
 
-        try
-        {
-            MainShell.getUniversity().getExams().remove(this);
+        try {
+            MainShell.getUniversity().removeExam(this);
         } catch (NoInitException e) {
             e.printStackTrace();
         }

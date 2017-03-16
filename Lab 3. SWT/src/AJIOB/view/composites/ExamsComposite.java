@@ -50,8 +50,6 @@ public class ExamsComposite extends Composite {
             } catch (NoInitException e) {
 
             }
-
-            ReloadTable();
         });
     }
 
@@ -83,15 +81,32 @@ public class ExamsComposite extends Composite {
                 TableItem tItem = new TableItem(table, SWT.LEFT);
                 tItem.setText(new String[]{exam.getSubject().getName(), exam.getEducator().getName()});
             }
+
+            //add listeners
+            MainShell.getUniversity().addExamListener(new AJIOB.model.listeners.Listener<Exam>() {
+                @Override
+                public void SthIsChanged(int changedIndex, Exam exam) {
+                    table.getItem(changedIndex).setText(
+                            new String[]{exam.getSubject().getName(), exam.getEducator().getName()}
+                    );
+                }
+
+                @Override
+                public void SthIsAdd(int newElemIndex, Exam e) {
+                    TableItem tItem = new TableItem(table, SWT.LEFT, newElemIndex);
+                    tItem.setText(new String[]{e.getSubject().getName(), e.getEducator().getName()});
+                }
+
+                @Override
+                public void SthIsRemoved(int oldElemIndex, Exam e) {
+                    table.remove(oldElemIndex);
+                }
+            });
         } catch (NoInitException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
 
         }
         return table;
-    }
-
-    private void ReloadTable() {
-        //TODO. add TableWiever
     }
 }

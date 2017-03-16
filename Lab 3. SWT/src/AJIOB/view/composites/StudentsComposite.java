@@ -10,7 +10,6 @@ import AJIOB.view.make.AddPersonShell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.graphics.Point;
 
 /**
  * Created by AJIOB on 08.03.2017.
@@ -126,7 +125,7 @@ public class StudentsComposite extends Composite {
 
                 @Override
                 public void SthIsAdd(int newElemIndex, Student s) {
-                    TableItem tItem = new TableItem(table, SWT.LEFT);
+                    TableItem tItem = new TableItem(table, SWT.LEFT, newElemIndex);
                     tItem.setText(new String[]{s.getName(), Integer.toString(s.getGradeBook().getGradeBookNumber())});
                 }
 
@@ -170,9 +169,7 @@ public class StudentsComposite extends Composite {
         personLabel.setText("Person info");
 
         Composite cHeader = new Composite(c, SWT.FILL);
-        GridLayout gridLayout = new GridLayout();
-        gridLayout.numColumns = 2;
-        cHeader.setLayout(gridLayout);
+        cHeader.setLayout(new GridLayout(2, false));
 
         Label nameTextLabel = new Label(cHeader, SWT.LEFT);
         nameTextLabel.setText("Name: ");
@@ -191,7 +188,6 @@ public class StudentsComposite extends Composite {
         refreshBtn.setText("Refresh");
         refreshBtn.addListener(SWT.Selection, event -> {
             try {
-                System.out.println(Integer.toString(studTable.getSelectionIndex()));
                 if (studTable.getSelectionIndex() >= 0)
                     refreshGradeInfo(MainShell.getUniversity().getStudents().get(studTable.getSelectionIndex()));
             } catch (NoInitException e) {

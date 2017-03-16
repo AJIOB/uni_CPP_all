@@ -1,7 +1,7 @@
 package AJIOB.model.uni;
 
-import AJIOB.model.listeners.MakeOperation;
 import AJIOB.model.listeners.Listener;
+import AJIOB.model.listeners.MakeOperation;
 import AJIOB.model.uni.books.GradeBook;
 import AJIOB.model.uni.buildings.Building;
 import AJIOB.model.uni.people.*;
@@ -154,5 +154,9 @@ public class University implements Building {
 
     public void addStudentListener(Listener<Student> listener) {
         studListeners.add(listener);
+    }
+
+    public void removeExam(Exam e) {
+        MakeOperation.remove(examListeners, exams, e);
     }
 }
