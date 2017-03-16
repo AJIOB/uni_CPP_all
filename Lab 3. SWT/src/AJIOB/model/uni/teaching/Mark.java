@@ -14,6 +14,7 @@ public class Mark {
 
     /**
      * Get mark as int
+     *
      * @return mark
      */
     public int mark() {
@@ -22,6 +23,7 @@ public class Mark {
 
     /**
      * Get subject, which what is that mark belongs
+     *
      * @return subject
      */
     public Subject subject() {

@@ -59,7 +59,6 @@ public class Exam {
      * Start current exam
      */
     public void startExam() {
-        System.out.println("Exam " + subject.getName() + " is started");
         if (!educator.takeExam(this)) {
             return;
         }
