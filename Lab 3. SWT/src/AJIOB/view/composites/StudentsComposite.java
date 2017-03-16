@@ -233,9 +233,7 @@ public class StudentsComposite extends Composite {
      * @param s Student, which info will be shown
      */
     private void refreshGradeInfo(Student s) {
-        System.out.println("Hello from RefreshGradeInfo");
-
-        gradeTable.clearAll();
+        gradeTable.removeAll();
         gradeBookNumberLabel.setText("");
         nameLabel.setText("");
 
