@@ -3,6 +3,7 @@ package AJIOB.view.make;
 import AJIOB.model.uni.people.Person;
 import AJIOB.view.MainShell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
@@ -43,17 +44,19 @@ public class AddPersonShell {
      * @param sh Parent shell
      */
     private static void init(Shell sh) {
+        sh.setLayout(new FillLayout());
+
+        Group g = new Group(sh, SWT.FILL);
+        g.setText("Person info:");
+
         RowLayout layout = new RowLayout();
         layout.type = SWT.VERTICAL;
         layout.spacing = 5;
         layout.marginWidth = 10;
         layout.marginHeight = 10;
-        sh.setLayout(layout);
+        g.setLayout(layout);
 
-        Label HeaderLabel = new Label(sh, SWT.CENTER);
-        HeaderLabel.setText("Person info:");
-
-        Composite gridComposite = new Composite(sh, SWT.FILL);
+        Composite gridComposite = new Composite(g, SWT.FILL);
         GridLayout gLayout = new GridLayout();
         gLayout.numColumns = 2;
         gridComposite.setLayout(gLayout);
@@ -63,7 +66,7 @@ public class AddPersonShell {
 
         Text nameText = new Text(gridComposite, SWT.FILL);
 
-        Composite downComposite = new Composite(sh, SWT.FILL);
+        Composite downComposite = new Composite(g, SWT.FILL);
         RowLayout rlayout = new RowLayout();
         rlayout.center = true;
         downComposite.setLayout(rlayout);

@@ -25,19 +25,20 @@ public class ExamsComposite extends Composite {
      * Add all basic functional
      */
     private void init() {
-        //TODO
+        setLayout(new FillLayout());
+
+        Group g = new Group(this, SWT.FILL);
+        g.setText("Exams");
+
         RowLayout layout = new RowLayout();
         layout.type = SWT.VERTICAL;
         layout.spacing = 10;
         layout.fill = true;
-        setLayout(layout);
+        g.setLayout(layout);
 
-        Label label = new Label(this, SWT.LEFT);
-        label.setText("Exams");
+        makeTable(g);
 
-        Table table = makeTable(this);
-
-        Button btn = new Button(this, SWT.CENTER | SWT.PUSH);
+        Button btn = new Button(g, SWT.CENTER | SWT.PUSH);
         btn.setText("Pass");
         btn.setLayoutData(new RowData(60, 30));
         btn.addListener(SWT.Selection, event -> {

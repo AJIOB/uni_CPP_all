@@ -57,15 +57,13 @@ public class StudentsComposite extends Composite {
      * @return Composite that made
      */
     private Composite makeStudPart(Composite parent) {
-        Composite c = new Composite(parent, SWT.FILL);
+        Group c = new Group(parent, SWT.FILL);
+        c.setText("Students");
         RowLayout layout = new RowLayout();
         layout.type = SWT.VERTICAL;
         layout.spacing = 10;
         layout.fill = true;
         c.setLayout(layout);
-
-        Label label = new Label(c, SWT.LEFT);
-        label.setText("Students");
 
         studTable = makeStudTable(c);
 
@@ -160,13 +158,11 @@ public class StudentsComposite extends Composite {
      * @return Composite that was made
      */
     private Composite makeGradeBookPart(Composite parent) {
-        Composite c = new Composite(parent, SWT.FILL);
+        Group c = new Group(parent, SWT.FILL);
+        c.setText("Person info");
         RowLayout verticalLayout = new RowLayout();
         verticalLayout.type = SWT.VERTICAL;
         c.setLayout(verticalLayout);
-
-        Label personLabel = new Label(c, SWT.CENTER);
-        personLabel.setText("Person info");
 
         Composite cHeader = new Composite(c, SWT.FILL);
         cHeader.setLayout(new GridLayout(2, false));

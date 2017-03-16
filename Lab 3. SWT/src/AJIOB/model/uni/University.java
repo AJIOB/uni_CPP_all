@@ -45,14 +45,16 @@ public class University implements Building {
         eduTEMP[0] = new Educator("Edu");
         eduTEMP[1] = new Educator("Petr");
 
-        Subject[] subjTEMP = new Subject[2];
-        subjTEMP[0] = new Subject("S1_test");
-        subjTEMP[1] = new Subject("S2_test");
+        Subject[] subjTEMP = new Subject[3];
+        subjTEMP[0] = new Subject("Math");
+        subjTEMP[1] = new Subject("Physics");
+        subjTEMP[2] = new Subject("Programming");
 
         HeadOfDepartment[] headTEMP = new HeadOfDepartment[2];
         headTEMP[0] = new HeadOfDepartment("Alex");
         headTEMP[0].getEducators().add(eduTEMP[0]);
         headTEMP[0].addSubject(subjTEMP[0]);
+        headTEMP[0].addSubject(subjTEMP[2]);
         headTEMP[1] = new HeadOfDepartment("Ivan");
         headTEMP[1].getEducators().add(eduTEMP[1]);
         headTEMP[1].addSubject(subjTEMP[1]);
