@@ -120,6 +120,28 @@ public class University implements Building {
         return newExam;
     }
 
+    /**
+     * Add new HeadOfDepartment person
+     *
+     * @param h New person
+     * @return Is added with current operation
+     */
+    public boolean addHeadOfDepartmentPerson(HeadOfDepartment h) {
+        if (h == null) {
+            return false;
+        }
+
+        MakeOperation.add(workerListeners, workers, h);
+
+        h.getSubjects()
+                .forEach(s -> MakeOperation.add(subjectListeners, subjects, s));
+
+        h.getEducators()
+                .forEach(e -> MakeOperation.add(workerListeners, workers, e));
+
+        return true;
+    }
+
     public String getName() {
         return name;
     }

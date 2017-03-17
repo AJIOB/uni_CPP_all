@@ -11,8 +11,14 @@ abstract public class Worker extends Person {
         this.job = job;
     }
 
+    public Worker(Person p, String job) {
+        super(p);
+        this.job = job;
+    }
+
     /**
      * Set current job of worker
+     *
      * @param job Name of job
      */
     public void setJob(String job) {

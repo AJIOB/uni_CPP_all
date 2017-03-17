@@ -1,10 +1,14 @@
 package AJIOB.view.composites;
 
 import AJIOB.exceptions.NoInitException;
+import AJIOB.model.listeners.Listener;
 import AJIOB.model.uni.people.HeadOfDepartment;
 import AJIOB.model.uni.people.Worker;
 import AJIOB.model.uni.teaching.Subject;
 import AJIOB.view.MainShell;
+import AJIOB.view.make.AddFewEducatorsShell;
+import AJIOB.view.make.AddFewSubjectsShell;
+import AJIOB.view.make.AddPersonShell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -31,7 +35,6 @@ public class HeadsOfDepartmentsComposite extends Composite {
         rLayoutForMain.type = SWT.HORIZONTAL;
         rLayoutForMain.marginWidth = 5;
         rLayoutForMain.spacing = 5;
-        //rLayoutForMain.pack = false;
 
         setLayout(rLayoutForMain);
 
@@ -51,9 +54,6 @@ public class HeadsOfDepartmentsComposite extends Composite {
         layout.type = SWT.VERTICAL;
         layout.spacing = 5;
         res.setLayout(layout);
-/*
-        Label headText = new Label(res, SWT.LEFT | SWT.HORIZONTAL);
-        headText.setText("Heads of departments");*/
 
         Table mainTable = new Table(res, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
 
@@ -62,14 +62,39 @@ public class HeadsOfDepartmentsComposite extends Composite {
         name.setWidth(100);
 
         try {
-            for (Worker w : MainShell.getUniversity().getWorkers()) {
-                if (w.getJob() == "HeadOfDepartment") {
+            MainShell.getUniversity().getWorkers().stream()
+                    .filter(worker -> worker.getJob() == "HeadOfDepartment")
+                    .forEach(w -> {
+                        TableItem tItem = new TableItem(mainTable, SWT.NONE);
+                        tItem.setText(new String[]{w.getName()});
+
+                        heads.add((HeadOfDepartment) w);
+                    });
+
+            //add listener if something is happened with this data
+            MainShell.getUniversity().addWorkerListener(new Listener<Worker>() {
+                @Override
+                public void SthIsChanged(int changedIndex, Worker w) {
+                    //todo if need
+                }
+
+                @Override
+                public void SthIsAdd(int newElemIndex, Worker w) {
+                    if (w.getJob() != "HeadOfDepartment") {
+                        return;
+                    }
+
                     TableItem tItem = new TableItem(mainTable, SWT.NONE);
                     tItem.setText(new String[]{w.getName()});
 
                     heads.add((HeadOfDepartment) w);
                 }
-            }
+
+                @Override
+                public void SthIsRemoved(int oldElemIndex, Worker oldElem) {
+                    //todo if need
+                }
+            });
         } catch (NoInitException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
@@ -80,6 +105,25 @@ public class HeadsOfDepartmentsComposite extends Composite {
             int index = mainTable.indexOf((TableItem) event.item);
             refreshSubjectsInfo(heads.get(index));
             currentHeadsIndex = index;
+        });
+
+        Button addHOD = new Button(res, SWT.CENTER);
+        addHOD.setText("Add new person");
+        addHOD.addListener(SWT.Selection, event -> {
+            HeadOfDepartment h;
+            try {
+                h = new HeadOfDepartment(AddPersonShell.run());
+                h.getSubjects().addAll(AddFewSubjectsShell.run());
+                h.getEducators().addAll(AddFewEducatorsShell.run());
+
+            } catch (NullPointerException e) {
+                return;
+            }
+
+            try {
+                MainShell.getUniversity().addHeadOfDepartmentPerson(h);
+            } catch (NoInitException e) {
+            }
         });
 
         return res;
@@ -107,8 +151,7 @@ public class HeadsOfDepartmentsComposite extends Composite {
         addBtn.addListener(SWT.Selection, event -> {
             int i = subjectTable.getSelectionIndex();
 
-            if ((i < 0) || (currentHeadsIndex < 0))
-            {
+            if ((i < 0) || (currentHeadsIndex < 0)) {
                 return;
             }
 

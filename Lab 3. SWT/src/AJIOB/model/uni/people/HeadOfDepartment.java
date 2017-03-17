@@ -20,6 +20,10 @@ public class HeadOfDepartment extends Worker {
         super(name, "HeadOfDepartment");
     }
 
+    public HeadOfDepartment(final Person p) {
+        super(p, "HeadOfDepartment");
+    }
+
     /**
      * Set exam of subject
      *
