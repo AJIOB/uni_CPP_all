@@ -4,3 +4,5 @@ Game: Divine the number from 1 to 100
 Make a simple zoo simulator
 	Lab3:
 Make a simpe university
+	Lab4:
+Add two vectors. Every pair of numbers must calculare in different thread.

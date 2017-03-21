@@ -1,0 +1,49 @@
+package AJIOB.model;
+
+/**
+ * Created by AJIOB on 21.03.2017.
+ *
+ * @author AJIOB
+ */
+public class Vector {
+    private double[] coordinates = new double[0];
+
+    /**
+     * Returns coordinate on i position
+     *
+     * @param i Index of coordinate
+     * @return Coordinate value
+     */
+    public double getCoordinate(int i) {
+        return coordinates[i];
+    }
+
+    /**
+     * Set coortinate of i position
+     *
+     * @param i     Index of coordinate
+     * @param value New value of coordinate
+     */
+    public void setCoordinate(int i, double value) {
+        //coordinates
+        //TODO: view docs
+    }
+
+    /**
+     * Set new size of Vector (quantity of coordinates)
+     *
+     * @param i New quantity of coordinates
+     */
+    public void setSize(int i) {
+        coordinates = new double[i];
+    }
+
+    /**
+     * Returns quantity of coordinates
+     *
+     * @return Current quantity of ccoordinates
+     */
+    public int getSize() {
+        return coordinates.size;
+    }
+}
