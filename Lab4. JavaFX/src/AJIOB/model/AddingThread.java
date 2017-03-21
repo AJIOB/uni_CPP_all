@@ -5,7 +5,7 @@ package AJIOB.model;
  *
  * @author AJIOB
  */
-public class AddingThread implements Thread {
+public class AddingThread extends Thread {
     private double number1, number2, res;
 
     public AddingThread(final double number1, final double number2) {
@@ -13,6 +13,7 @@ public class AddingThread implements Thread {
         this.number2 = number2;
     }
 
+    @Override
     public void run() {
         res = number1 + number2;
     }

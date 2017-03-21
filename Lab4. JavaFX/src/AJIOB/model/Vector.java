@@ -19,14 +19,13 @@ public class Vector {
     }
 
     /**
-     * Set coortinate of i position
+     * Set coordinate of i position
      *
      * @param i     Index of coordinate
      * @param value New value of coordinate
      */
     public void setCoordinate(int i, double value) {
-        //coordinates
-        //TODO: view docs
+        coordinates[i] = value;
     }
 
     /**
@@ -41,9 +40,9 @@ public class Vector {
     /**
      * Returns quantity of coordinates
      *
-     * @return Current quantity of ccoordinates
+     * @return Current quantity of coordinates
      */
     public int getSize() {
-        return coordinates.size;
+        return coordinates.length;
     }
 }
