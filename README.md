@@ -8,11 +8,14 @@ Here you can find tasks, that I made on my lab work.
 * [lab3](README.md#Lab3)
 * [lab4](README.md#Lab4)
 
-### Lab1:  
+### Lab1  
 Game: Divine the number from 1 to 100
-### Lab2:  
+
+![Base class & sequence diagrams](tasks/Sequence Diagrams/lab1.png)
+
+### Lab2  
 Make a simple zoo simulator
-### Lab3:  
+### Lab3  
 Make a simpe university
-### Lab4:  
+### Lab4  
 Add two vectors. Every pair of numbers must calculare in different thread.
