@@ -11,11 +11,20 @@ Here you can find tasks, that I made on my lab work.
 ### Lab1  
 Game: Divine the number from 1 to 100
 
-![Base class & sequence diagrams](tasks/Sequence Diagrams/lab1.png)
+![Base class & sequence diagrams](https://ibb.co/dfv4Dv)
 
 ### Lab2  
 Make a simple zoo simulator
+
+![Base class & sequence diagrams](https://ibb.co/nvcUfa)
+
 ### Lab3  
 Make a simpe university
+
+![Base class & sequence diagrams](https://ibb.co/jECUfa)
+
 ### Lab4  
 Add two vectors. Every pair of numbers must calculare in different thread.
+
+![Base class & sequence diagrams](https://ibb.co/fPGBtv)
+
