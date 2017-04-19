@@ -7,6 +7,7 @@ Here you can find tasks, that I made on my lab work.
 * [lab2](#lab2)
 * [lab3](#lab3)
 * [lab4](#lab4)
+* [lab5](#lab5)
 
 ### Lab1  
 Game: Divine the number from 1 to 100
@@ -28,3 +29,11 @@ Add two vectors. Every pair of numbers must calculare in different thread.
 
 ![Base class & sequence diagrams](https://image.ibb.co/cSo20a/lab4.png)
 
+
+### Lab5
+**Task on Scala**  
+1. Write function that sorts List. Function must be written with tail and simple recurtion.  
+2. Write simple factorial  
+3. Write function that get List and return Map:  
+    *   element will be key  
+    *   number of entries of key in List will be value  
